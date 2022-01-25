@@ -1,0 +1,50 @@
+apiVersion: v1
+entries:
+  agent:
+  - apiVersion: v2
+    appVersion: 2021.2.2
+    created: "2022-01-25T00:28:30.20254338Z"
+    description: A TeamCity Agent Helm chart for Kubernetes
+    digest: a2dc40c85e3e47693701acd42d246da4abba4f9b9b78cc137cccae42cfb6b64c
+    name: agent
+    type: application
+    urls:
+    - https://github.com/Strangerxxx/teamcity-helm/releases/download/agent-1.0.1/agent-1.0.1.tgz
+    version: 1.0.1
+  server:
+  - apiVersion: v2
+    appVersion: 2021.2.2
+    created: "2022-01-25T00:28:30.400198988Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.16.2
+    description: A TeamCity Server Helm chart for Kubernetes
+    digest: 5b800ce06fef20ff71d4b08944f6cd1056b615336f18db6e5bd987aa1bca2e48
+    name: server
+    type: application
+    urls:
+    - https://github.com/Strangerxxx/teamcity-helm/releases/download/server-1.0.1/server-1.0.1.tgz
+    version: 1.0.1
+  teamcity:
+  - apiVersion: v2
+    appVersion: 2021.2.2
+    created: "2022-01-25T00:28:30.621982131Z"
+    dependencies:
+    - condition: server.enabled
+      name: server
+      repository: file://../server
+      version: 1.0.1
+    - condition: agent.enabled
+      name: agent
+      repository: file://../agent
+      version: 1.0.1
+    description: A TeamCity Helm chart for Kubernetes
+    digest: 9caa8c55c6091ccefdb50431e0e0374b91a83ac0a4a34d8ba96e03acabd1abe7
+    name: teamcity
+    type: application
+    urls:
+    - https://github.com/Strangerxxx/teamcity-helm/releases/download/teamcity-1.0.1/teamcity-1.0.1.tgz
+    version: 1.0.1
+generated: "2022-01-25T00:28:30.621996831Z"
