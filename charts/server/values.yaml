@@ -81,9 +81,9 @@ global:
 persistence:
   data:
     enabled: true
-#    existingClaim: ""
-#    snapshotName: ""
-#    storageClass: ""
+    #    existingClaim: ""
+    #    snapshotName: ""
+    #    storageClass: ""
     accessModes:
       - ReadWriteOnce
     size: 8Gi
@@ -116,6 +116,14 @@ volumePermissions:
     repository: busybox
     pullPolicy: IfNotPresent
     tag: ""
+  securityContext:
+    runAsUser: 0
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
   resources: {}
 
 downloadJDBC:
@@ -124,6 +132,13 @@ downloadJDBC:
     repository: busybox # or maven
     pullPolicy: IfNotPresent
     tag: ""
+  securityContext:
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
   maven:
     enabled: false # if true maven image should be used
     groupId: "org.postgresql"

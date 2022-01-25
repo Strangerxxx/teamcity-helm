@@ -28,7 +28,9 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
       {{- if or .Values.postgresql.enabled .Values.externalPostgresql.enabled }}
-        - name: download-jdbc #/data/lib/jdbc/
+        - name: download-jdbc
+          securityContext:
+            {{- toYaml (merge (dict "runAsUser" 1000) .Values.downloadJDBC.securityContext) | nindent 12 }}
           image: {{ printf "%s:%s" .Values.downloadJDBC.image.repository (default "latest" .Values.downloadJDBC.image.tag) }}
           imagePullPolicy: {{ .Values.downloadJDBC.image.pullPolicy | default "IfNotPresent" }}
           resources:
@@ -54,6 +56,8 @@ spec:
       {{- end }}
       {{- if .Values.volumePermissions.enabled }}
         - name: fix-permissions
+          securityContext:
+            {{- toYaml .Values.volumePermissions.securityContext | nindent 12 }}
           image: {{ printf "%s:%s" .Values.volumePermissions.image.repository (default "latest" .Values.volumePermissions.image.tag) }}
           imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | default "IfNotPresent" }}
           resources:
@@ -68,8 +72,6 @@ spec:
               mountPath: /data
             - name: artifacts
               mountPath: /data/system/artifacts
-          securityContext:
-            runAsUser: 0
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
