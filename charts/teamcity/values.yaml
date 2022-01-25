@@ -3,5 +3,7 @@ fullnameOverride: ""
 
 server:
   enabled: true
+  postgresql:
+    enabled: true
 agent:
   enabled: true

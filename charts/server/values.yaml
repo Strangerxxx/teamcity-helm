@@ -116,6 +116,7 @@ volumePermissions:
     repository: busybox
     pullPolicy: IfNotPresent
     tag: ""
+  resources: {}
 
 downloadJDBC:
   enabled: true

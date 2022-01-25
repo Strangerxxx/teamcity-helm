@@ -57,19 +57,12 @@ spec:
           image: {{ printf "%s:%s" .Values.volumePermissions.image.repository (default "latest" .Values.volumePermissions.image.tag) }}
           imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | default "IfNotPresent" }}
           resources:
-            limits:
-              cpu: 50m
-              memory: 32Mi
-            requests:
-              cpu: 50m
-              memory: 32Mi
+            {{- toYaml .Values.volumePermissions.resources | nindent 12 }}
           command:
             - /bin/sh
             - -cx
             - |
-              {{- if and .Values.securityContext.runAsUser .Values.securityContext.runAsGroup }}
-              chown -Rvh {{ .Values.securityContext.runAsUser }}:{{ .Values.securityContext.runAsGroup }} /data
-              {{- end }}
+              chown -Rvh {{ default 1000 .Values.securityContext.runAsUser }}:{{ default 1000 .Values.securityContext.runAsGroup }} /data
           volumeMounts:
             - name: data
               mountPath: /data

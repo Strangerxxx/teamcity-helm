@@ -62,6 +62,7 @@ volumePermissions:
     repository: busybox
     pullPolicy: IfNotPresent
     tag: ""
+  resources: {}
 
 persistence:
   enabled: true
