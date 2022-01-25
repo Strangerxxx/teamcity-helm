@@ -5,5 +5,5 @@ dependencies:
 - name: agent
   repository: file://../agent
   version: 1.0.0
-digest: sha256:eedcd3bfdb8974fc95947117b4a3a913c70bd16299e141953bab64e3c5d2b387
-generated: "2022-01-25T03:08:58.048225+03:00"
+digest: sha256:0c08d36bb3f5a3aead594af86d89089c1ef9aa459e8caae755ad29a9d4b4b92f
+generated: "2022-01-25T03:16:40.068033+03:00"
