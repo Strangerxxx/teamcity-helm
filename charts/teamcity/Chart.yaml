@@ -7,11 +7,11 @@ appVersion: "2021.2.2"
 dependencies:
   - name: server
     version: 0.1.0
-    repository: "https://strangerxxx.github.io/teamcity-helm"
-#    repository: "file://../server"
+#    repository: "https://strangerxxx.github.io/teamcity-helm"
+    repository: "file://../server"
     condition: server.enabled
   - name: agent
     version: 0.1.0
-    repository: "https://strangerxxx.github.io/teamcity-helm"
-#    repository: "file://../agent"
+#    repository: "https://strangerxxx.github.io/teamcity-helm"
+    repository: "file://../agent"
     condition: agent.enabled
