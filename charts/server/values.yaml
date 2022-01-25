@@ -132,7 +132,7 @@ downloadJDBC:
     repository: busybox # or maven
     pullPolicy: IfNotPresent
     tag: ""
-  securityContext:
+  securityContext: {}
     # capabilities:
     #   drop:
     #   - ALL
