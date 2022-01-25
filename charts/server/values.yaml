@@ -1,0 +1,160 @@
+# Default values for server.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: jetbrains/server
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+global:
+  server: {}
+#    storageClass: ""
+
+persistence:
+  data:
+    enabled: true
+#    existingClaim: ""
+#    snapshotName: ""
+#    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+    annotations: {}
+    selector: {}
+  artifacts:
+    enabled: true
+    #    existingClaim: ""
+    #    snapshotName: ""
+    #    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+    annotations: {}
+    selector: {}
+  logs:
+    enabled: true
+    #    existingClaim: ""
+    #    snapshotName: ""
+    #    storageClass: ""
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+    annotations: {}
+    selector: {}
+
+volumePermissions:
+  enabled: false
+  image:
+    repository: busybox
+    pullPolicy: IfNotPresent
+    tag: ""
+
+downloadJDBC:
+  enabled: true
+  image:
+    repository: busybox # or maven
+    pullPolicy: IfNotPresent
+    tag: ""
+  maven:
+    enabled: false # if true maven image should be used
+    groupId: "org.postgresql"
+    artifactId: "postgresql"
+    version: "42.3.1"
+    packaging: "jar"
+    transitive: false
+
+config:
+  database:
+    maxConnections: 50
+    testOnBorrow: false
+
+postgresql:
+  enabled: false
+  nameOverride: server-postgresql
+  postgresqlDatabase: teamcity
+  postgresqlUsername: postgres
+  postgresqlPassword: postgres
+  replication:
+    enabled: false
+    readReplicas: 2
+    synchronousCommit: "on"
+    numSynchronousReplicas: 1
+    applicationName: teamcity
+
+externalPostgresql:
+  enabled: false
+  host: "some.postgresql.host"
+  port: "5432"
+  username: ""
+  password: ""
+  database: ""
+
+#additionalEnv: {}

@@ -1,0 +1,7 @@
+nameOverride: ""
+fullnameOverride: ""
+
+server:
+  enabled: true
+agent:
+  enabled: true
