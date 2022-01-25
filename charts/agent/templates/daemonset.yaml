@@ -26,7 +26,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       initContainers:
-      {{- if and .Values.volumePermissions.enabled }}
+      {{- if .Values.volumePermissions.enabled }}
         - name: fix-permissions
           image: {{ printf "%s:%s" .Values.volumePermissions.image.repository (default "latest" .Values.volumePermissions.image.tag) }}
           imagePullPolicy: {{ .Values.volumePermissions.image.pullPolicy | default "IfNotPresent" }}
@@ -73,15 +73,15 @@ spec:
               mountPath: /data/teamcity_agent/conf
             - name: docker-sock
               mountPath: /var/run/docker.sock
-            - name: buildagent-work
+            - name: agent-work
               mountPath: /opt/buildagent/work
-            - name: buildagent-temp
+            - name: agent-temp
               mountPath: /opt/buildagent/temp
-            - name: buildagent-tools
+            - name: agent-tools
               mountPath: /opt/buildagent/tools
-            - name: buildagent-plugins
+            - name: agent-plugins
               mountPath: /opt/buildagent/plugins
-            - name: buildagent-system
+            - name: agent-system
               mountPath: /opt/buildagent/system
           env:
             - name: SERVER_URL
@@ -112,19 +112,19 @@ spec:
         - name: docker-sock
           hostPath:
             path: /var/run/docker.sock
-        - name: buildagent-work
+        - name: agent-work
           hostPath:
             path: /opt/buildagent/work
-        - name: buildagent-temp
+        - name: agent-temp
           hostPath:
             path: /opt/buildagent/temp
-        - name: buildagent-tools
+        - name: agent-tools
           hostPath:
             path: /opt/buildagent/tools
-        - name: buildagent-plugins
+        - name: agent-plugins
           hostPath:
             path: /opt/buildagent/plugins
-        - name: buildagent-system
+        - name: agent-system
           hostPath:
             path: /opt/buildagent/system
 {{- end }}

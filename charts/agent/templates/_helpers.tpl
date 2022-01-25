@@ -69,12 +69,28 @@ Define deployment type
 {{- end }}
 
 {{/*
+Create a default fully qualified app name for postgresql.
+*/}}
+{{- define "agent.server.fullname" -}}
+{{- if .Values.fullnameOverride -}}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name "server" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Set server url
 */}}
 {{- define "agent.server.url" -}}
 {{- if .Values.config.serverUrl -}}
 {{- .Values.config.serverUrl -}}
 {{- else -}}
-http://{{ include "teamcity.fullname" . }}:8111
+http://{{ include "agent.server.fullname" . }}
 {{- end -}}
 {{- end -}}
