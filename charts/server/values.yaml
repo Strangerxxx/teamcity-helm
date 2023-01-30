@@ -156,9 +156,14 @@ config:
 postgresql:
   enabled: false
   nameOverride: server-postgresql
-  postgresqlDatabase: teamcity
-  postgresqlUsername: postgres
-  postgresqlPassword: postgres
+  auth:
+    username: postgres
+    password: postgres
+    database: teamcity
+    secretKeys:
+      adminPasswordKey: postgres-password
+      userPasswordKey: password
+      replicationPasswordKey: replication-password
   replication:
     enabled: false
     readReplicas: 2

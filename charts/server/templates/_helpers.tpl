@@ -144,7 +144,7 @@ Set postgresql database
 */}}
 {{- define "server.postgresql.database" -}}
 {{- if .Values.postgresql.enabled -}}
-{{- default "teamcity" .Values.postgresql.postgresqlDatabase }}
+{{- default "teamcity" .Values.postgresql.auth.database }}
 {{- else -}}
 {{ required "A valid .Values.externalPostgresql.database is required" .Values.externalPostgresql.database }}
 {{- end -}}
@@ -156,7 +156,7 @@ Set postgresql username
 */}}
 {{- define "server.postgresql.username" -}}
 {{- if .Values.postgresql.enabled -}}
-{{- default "postgres" .Values.postgresql.postgresqlUsername }}
+{{- default "postgres" .Values.postgresql.auth.username }}
 {{- else -}}
 {{ required "A valid .Values.externalPostgresql.username is required" .Values.externalPostgresql.username }}
 {{- end -}}
@@ -167,7 +167,7 @@ Set postgresql password
 */}}
 {{- define "server.postgresql.password" -}}
 {{- if .Values.postgresql.enabled -}}
-{{- default "" .Values.postgresql.postgresqlPassword }}
+{{- default "" .Values.postgresql.auth.password }}
 {{- else -}}
 {{ required "A valid .Values.externalPostgresql.password is required" .Values.externalPostgresql.password }}
 {{- end -}}
