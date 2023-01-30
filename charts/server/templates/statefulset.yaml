@@ -68,10 +68,12 @@ spec:
             - |
               chown -Rvh {{ default 1000 .Values.securityContext.runAsUser }}:{{ default 1000 .Values.securityContext.runAsGroup }} /data
           volumeMounts:
+            - name: logs
+              mountPath: /data/logs
             - name: data
-              mountPath: /data
+              mountPath: /data/data
             - name: artifacts
-              mountPath: /data/system/artifacts
+              mountPath: /data/artifacts
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}

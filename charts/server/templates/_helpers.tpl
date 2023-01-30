@@ -122,7 +122,7 @@ Set postgres host
 */}}
 {{- define "server.postgresql.host" -}}
 {{- if .Values.postgresql.enabled -}}
-{{- include "server.postgresql.fullname" . -}}
+{{- include "server.postgresql.fullname" . -}}-headless
 {{- else -}}
 {{ required "A valid .Values.externalPostgresql.host is required" .Values.externalPostgresql.host }}
 {{- end -}}
