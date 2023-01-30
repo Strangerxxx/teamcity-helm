@@ -51,7 +51,7 @@ spec:
               mvn dependency:get -Dartifact={{ include "server.jdbc.artifact" . }} -Dtransitive={{ .Values.downloadJDBC.maven.transitive }}
               mvn dependency:copy -Dartifact={{ include "server.jdbc.artifact" . }} -DoutputDirectory=/data/lib/jdbc/
               {{- else }}
-              (mkdir -p /tmp/jdbc/ && wget -P /tmp/jdbc/ {{ include "server.jdbc.artifactUrl" . }}) && (mkdir -p /data/lib/jdbc/ && cp -rf /tmp/jdbc/* /data/lib/jdbc/)
+              (mkdir -p /data/lib/jdbc/ && cd /data/lib/jdbc/ && curl -O {{ include "server.jdbc.artifactUrl" . }})
               {{- end }}
       {{- end }}
       {{- if .Values.volumePermissions.enabled }}

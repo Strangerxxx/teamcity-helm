@@ -129,10 +129,11 @@ volumePermissions:
 downloadJDBC:
   enabled: true
   image:
-    repository: busybox # or maven
+    repository: curlimages/curl # or maven
     pullPolicy: IfNotPresent
     tag: ""
-  securityContext: {}
+  securityContext:
+    runAsUser: 0
     # capabilities:
     #   drop:
     #   - ALL
@@ -143,7 +144,7 @@ downloadJDBC:
     enabled: false # if true maven image should be used
     groupId: "org.postgresql"
     artifactId: "postgresql"
-    version: "42.3.1"
+    version: "42.5.1"
     packaging: "jar"
     transitive: false
 

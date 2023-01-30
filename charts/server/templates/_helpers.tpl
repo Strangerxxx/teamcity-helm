@@ -133,7 +133,7 @@ Set postgres port
 */}}
 {{- define "server.postgresql.port" -}}
 {{- if .Values.postgresql.enabled -}}
-{{- default 5432 .Values.postgresql.service.port -}}
+{{- default 5432 .Values.postgresql.primary.service.ports.postgresql -}}
 {{- else -}}
 {{- required "A valid .Values.externalPostgresql.port is required" .Values.externalPostgresql.port -}}
 {{- end -}}
