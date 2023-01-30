@@ -3,6 +3,16 @@ entries:
   agent:
   - apiVersion: v2
     appVersion: 2022.10.1
+    created: "2023-01-30T05:44:12.692750432Z"
+    description: A TeamCity Agent Helm chart for Kubernetes
+    digest: c150bfa1095d6ae715c361489be281ea87782d7c87410ca42e90b26cbde055b9
+    name: agent
+    type: application
+    urls:
+    - https://github.com/Strangerxxx/teamcity-helm/releases/download/agent-2.3.2/agent-2.3.2.tgz
+    version: 2.3.2
+  - apiVersion: v2
+    appVersion: 2022.10.1
     created: "2023-01-30T03:46:46.568130759Z"
     description: A TeamCity Agent Helm chart for Kubernetes
     digest: 7da52d43c9adab81632d88ad08aebc22caa5439742ad00c4b3aa2854559fe832
@@ -72,6 +82,21 @@ entries:
     - https://github.com/Strangerxxx/teamcity-helm/releases/download/agent-1.0.1/agent-1.0.1.tgz
     version: 1.0.1
   server:
+  - apiVersion: v2
+    appVersion: 2022.10.1
+    created: "2023-01-30T05:44:12.850924638Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.1.11
+    description: A TeamCity Server Helm chart for Kubernetes
+    digest: acfca09b7e5c90291ddb1788f0f8152cecd1f0542f1d9c086677b421f4536b28
+    name: server
+    type: application
+    urls:
+    - https://github.com/Strangerxxx/teamcity-helm/releases/download/server-2.3.2/server-2.3.2.tgz
+    version: 2.3.2
   - apiVersion: v2
     appVersion: 2022.10.1
     created: "2023-01-30T03:46:46.731562942Z"
@@ -178,6 +203,25 @@ entries:
     - https://github.com/Strangerxxx/teamcity-helm/releases/download/server-1.0.1/server-1.0.1.tgz
     version: 1.0.1
   teamcity:
+  - apiVersion: v2
+    appVersion: 2022.10.1
+    created: "2023-01-30T05:44:12.976756965Z"
+    dependencies:
+    - condition: server.enabled
+      name: server
+      repository: file://../server
+      version: 2.3.2
+    - condition: agent.enabled
+      name: agent
+      repository: file://../agent
+      version: 2.3.2
+    description: A TeamCity Helm chart for Kubernetes
+    digest: 4620f5eb2011d4f97da083da93d88792c5b2a1681f51b97cad5b89b86071a7bd
+    name: teamcity
+    type: application
+    urls:
+    - https://github.com/Strangerxxx/teamcity-helm/releases/download/teamcity-2.3.2/teamcity-2.3.2.tgz
+    version: 2.3.2
   - apiVersion: v2
     appVersion: 2022.10.1
     created: "2023-01-30T03:46:46.886905353Z"
@@ -311,4 +355,4 @@ entries:
     urls:
     - https://github.com/Strangerxxx/teamcity-helm/releases/download/teamcity-1.0.1/teamcity-1.0.1.tgz
     version: 1.0.1
-generated: "2023-01-30T03:46:46.886988354Z"
+generated: "2023-01-30T05:44:12.976865768Z"
